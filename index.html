@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Flux</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand flux-logo" href="#">Flux</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="#">Hombres</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Mujeres</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Niños</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Nuevas Llegadas</a></li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+              <a href="#" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="video-container">
+      <video autoplay muted loop>
+        <source src="img/publicidad-zapas.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Cuerpo -->
+    <div class="container mt-4">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 g-3">
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/4DFWD_4_Shoes_Black_JI1452_01_00_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">4DFWD Shoes</h5>
+              <p class="card-price mt-auto">$129.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Adiclog_Shoes_Black_JH5498_01_00_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Adiclog Shoes</h5>
+              <p class="card-price mt-auto">$99.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Essentials_Fleece_Loose_Joggers_Green_JC8991_21_model.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Essentials Joggers</h5>
+              <p class="card-price mt-auto">$59.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Gazelle_Bold_x_Liberty_London_Shoes_Black_JI2572_01_00_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Gazelle Shoes</h5>
+              <p class="card-price mt-auto">$99.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Gazelle_Indoor_Shoes_Blue_IF9643_01_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Gazelle Indoor Shoes</h5>
+              <p class="card-price mt-auto">$79.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Rivalry_Low_Lux_Shoes_Black_JR2677_01_00_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Rivalry Low Lux Shoes</h5>
+              <p class="card-price mt-auto">$119.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Samba_Spikeless_Golf_Shoes_White_JH6151_HM1.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Samba Spikeless Golf Shoes</h5>
+              <p class="card-price mt-auto">$99.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/adidas1.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Adidas 1</h5>
+              <p class="card-price mt-auto">$99.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/AIR+FORCE+1+_07 moño.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 Moño</h5>
+              <p class="card-price mt-auto">$119.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/AIR+FORCE+1+_07+LV8.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 LV8</h5>
+              <p class="card-price mt-auto">$149.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/AIR+FORCE+1+BG.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 BG</h5>
+              <p class="card-price mt-auto">$129.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/TLRD_Impact_Training_High_Support_Bra_Pink_JI8039_21_model.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">TLRD Impact Training Bra</h5>
+              <p class="card-price mt-auto">$79.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Aspyre_Shoes_White_JI2122_01_00_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Aspyre Shoes</h5>
+              <p class="card-price mt-auto">$99.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/adidas_x_MOON_BOOT_Ultraboot_Shoes_Beige_IH2490_01_standard.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Adidas UltraBoot</h5>
+              <p class="card-price mt-auto">$119.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/niño FORCE+1+LOW+EASYON+LV8+1+(PS).png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 Low LV8 Niño</h5>
+              <p class="card-price mt-auto">$89.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Rosa FORCE+1+LV8+1+(PS).png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 low LV8</h5>
+              <p class="card-price mt-auto">$109.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/AIR+FORCE+1+_07.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 07</h5>
+              <p class="card-price mt-auto">$109.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/ByR FORCE+1+LOW+EASYON+LV8+3+(PS).png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 ByR Low</h5>
+              <p class="card-price mt-auto">$100</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/Adicolor_Classics_SST_Track_Jacket_Brown_JP2519_21_model.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Conjunto Adidas Marrón</h5>
+              <p class="card-price mt-auto">$89.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/AIR+FORCE+1+LOW+RETRO+QS.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 Low Retro QS</h5>
+              <p class="card-price mt-auto">$109.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/J+FORCE+1+LOW+LX+SP.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Air Force 1 LX</h5>
+              <p class="card-price mt-auto">$109.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/adidas_Disney_Minnie_Mouse_Crew_Set_Black_JD0583_01_laydown.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Adidas Minnie Crew Set</h5>
+              <p class="card-price mt-auto">$169.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/custom-nike-air-force-1-low-by-you-shoes.png" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Custom Air Force 1 Low</h5>
+              <p class="card-price mt-auto">$249.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="img/adidas_x_FARM_Rio_Medium-Support_Bra_Orange_JD6309_21_model.avif" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Conjunto Adidas Farm Rio </h5>
+              <p class="card-price mt-auto">$79.99</p>
+              <button class="btn btn-primary mt-2">Comprar Ahora</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-4 py-3">
+      <div class="container">
+        <p class="text-center">&copy; 2025 Nicolás Roggiano. Todos los derechos reservados.</p>
+        <div class="d-flex justify-content-center flex-wrap">
+          <a href="Landing.html" class="mx-2 my-1">Sobre Nosotros</a>
+          <a href="#" class="mx-2 my-1">Contacto</a>
+          <a href="#" class="mx-2 my-1">Botón de Devolución</a>
+          <a href="#" class="mx-2 my-1">Defensa al Consumidor</a>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://kit.fontawesome.com/f130cba737.js" crossorigin="anonymous"></script>
+  </body>
+</html>
