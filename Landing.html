@@ -3,83 +3,420 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flux</title>
+    <title>Flux | Tienda de Ropa</title>
     <link rel="stylesheet" href="estilos-LP.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Header -->
     <header>
-      <nav>
-        <div class="logo">FLUX</div>
-        <ul>
-          <li><a href="#home">Inicio</a></li>
-          <li><a href="index.html">Productos</a></li>
-          <li><a href="#about">Nosotros</a></li>
-          <li><a href="login.html">Iniciar Sesión</a></li>
-        </ul>
+      <nav class="navbar">
+        <div class="container">
+          <a class="navbar-brand flux-logo" href="index.html">
+            <span class="logo-text">FLUX</span>
+            <span class="logo-dot">.</span>
+          </a>
+          <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="nav-menu">
+            <ul class="nav-links">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="index.html#products">Productos</a></li>
+              <li><a href="#about">Nosotros</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="nav-icons">
+              <a href="login.html" class="nav-icon"><i class="fa-regular fa-user"></i></a>
+              <a href="#" class="nav-icon"><i class="fa-regular fa-heart"></i></a>
+              <a href="#" class="nav-icon cart-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-count">0</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
 
     <main>
-      <section id="home" class="hero">
-        <h1>Descubre tu estilo con Flux</h1>
-        <p>Ropa urbana para los que marcan tendencia</p>
-        <a href="index.html" class="cta-button">Ver Colección</a>
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+          <h1 class="animate-fade-in">Descubre tu estilo con <span class="accent">Flux</span></h1>
+          <p class="animate-fade-in delay-1">Ropa urbana para los que marcan tendencia. Encuentra las mejores marcas y los diseños más exclusivos.</p>
+          <div class="hero-buttons animate-fade-in delay-2">
+            <a href="index.html" class="btn primary-btn">Ver Colección <i class="fas fa-chevron-right"></i></a>
+            <a href="#about" class="btn outline-btn">Conoce Más</a>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <i class="fas fa-arrow-down"></i>
+        </div>
       </section>
 
-      <section id="productos" class="productos">
-        <h2>Productos Destacados</h2>
-        <div class="producto-grid">
-          <div class="producto">
-            <img src="img/AIR+FORCE+1+_07 moño.png" alt="Producto 1" />
-            <h3>Air Force 1 07´</h3>
-            <p>$104.99</p>
-          </div>
-          <div class="producto">
-            <img src="img/AIR+FORCE+1+LOW+RETRO+QS.png" alt="Producto 2" />
-            <h3>Air Force 1 Low Retro</h3>
-            <p>$119.99</p>
-          </div>
-          <div class="producto">
-            <img src="img/Ojotas Lotto Midway.jpg" alt="Producto 3" />
-            <h3>Ojotas Lotto Midway</h3>
-            <p>$89.99</p>
-          </div>
-          <div class="producto">
-            <img
-              src="img/Gazelle_Bold_x_Liberty_London_Shoes_Black_JI2572_01_00_standard.avif"
-              alt="Producto 4"
-            />
-            <h3>Gazelle Bold Liberty</h3>
-            <p>$104.99</p>
+      <!-- Brands Section -->
+      <section class="brands-section">
+        <div class="container">
+          <div class="brands-container">
+            <div class="brand-logo"><img src="img/nike-logo.png" alt="Nike"></div>
+            <div class="brand-logo"><img src="img/Adidas-Logo.jpg" alt="Adidas"></div>
+            <div class="brand-logo"><img src="img/puma-logo.jpg" alt="Puma"></div>
+            <div class="brand-logo"><img src="img/reebok-logo.jpg" alt="Reebok"></div>
+            <div class="brand-logo"><img src="img/new-balance-logo.png" alt="New Balance"></div>
           </div>
         </div>
       </section>
 
-      <section id="about" class="about">
-        <h2>Sobre Flux</h2>
-        <p>
-          Flux es más que una marca, es un estilo de vida. Fusionamos prendas para aquellos que se
-          atreven a ser diferentes y expresar su individualidad a través de la
-          moda urbana. Nos adaptamos a tiempos de cambios, a las nuevas
-          generaciones, y por eso te traemos los más exclusivos productos de las
-          mejores marcas para que crees tu propio estilo.
-        </p>
+      <!-- Productos -->
+      <section id="productos" class="products-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Productos Destacados</h2>
+            <p>Descubre nuestras piezas más populares</p>
+          </div>
+          
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="product-image">
+                <img src="img/AIR+FORCE+1+_07 moño.png" alt="Air Force 1 07">
+                <div class="product-actions">
+                  <button class="action-btn"><i class="fa-regular fa-heart"></i></button>
+                  <button class="action-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(42)</span>
+                </div>
+                <h3>Air Force 1 07´</h3>
+                <p class="product-brand">Nike</p>
+                <p class="product-price">$104.99</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <img src="img/AIR+FORCE+1+LOW+RETRO+QS.png" alt="Air Force 1 Low Retro">
+                <div class="product-actions">
+                  <button class="action-btn"><i class="fa-regular fa-heart"></i></button>
+                  <button class="action-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>(28)</span>
+                </div>
+                <h3>Air Force 1 Low Retro</h3>
+                <p class="product-brand">Nike</p>
+                <p class="product-price">$119.99</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <span class="product-tag new-tag">Nuevo</span>
+                <img src="img/Gazelle_Bold_x_Liberty_London_Shoes_Black_JI2572_01_00_standard.avif" alt="Gazelle Bold Liberty">
+                <div class="product-actions">
+                  <button class="action-btn"><i class="fa-regular fa-heart"></i></button>
+                  <button class="action-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <span>(56)</span>
+                </div>
+                <h3>Gazelle Bold Liberty</h3>
+                <p class="product-brand">Adidas</p>
+                <p class="product-price">$104.99</p>
+              </div>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <span class="product-tag sale-tag">-15%</span>
+                <img src="img/adidas_x_MOON_BOOT_Ultraboot_Shoes_Beige_IH2490_01_standard.avif" alt="Adidas UltraBoot">
+                <div class="product-actions">
+                  <button class="action-btn"><i class="fa-regular fa-heart"></i></button>
+                  <button class="action-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                </div>
+              </div>
+              <div class="product-info">
+                <div class="product-rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <span>(34)</span>
+                </div>
+                <h3>Adidas UltraBoot</h3>
+                <p class="product-brand">Adidas</p>
+                <p class="product-price"><span class="original-price">$139.99</span> $119.99</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center">
+            <a href="index.html#products" class="btn outline-dark-btn">Ver Todos los Productos <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
       </section>
 
-      <section id="contacto" class="contacto">
-        <h2>Mantente Conectado</h2>
-        <form id="newsletter-form">
-          <input type="email" placeholder="Tu correo electrónico" required />
-          <button type="submit">Suscribirse</button>
-        </form>
+      <!-- About Section -->
+      <section id="about" class="about-section">
+        <div class="container">
+          <div class="about-grid">
+            <div class="about-image">
+              <img src="img/about-image.jpg" alt="About Flux">
+              <div class="image-overlay">
+                <div class="overlay-content">
+                  <h3>Nuestra Historia</h3>
+                  <p>Desde 2015 marcando tendencia</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="about-content">
+              <h2>Sobre Flux</h2>
+              
+              <p>Flux es más que una marca, es un estilo de vida. Fusionamos prendas para aquellos que se atreven a ser diferentes y expresar su individualidad a través de la moda urbana.</p>
+              
+              <p>Nos adaptamos a tiempos de cambios, a las nuevas generaciones, y por eso te traemos los más exclusivos productos de las mejores marcas para que crees tu propio estilo.</p>
+              
+              <div class="features-grid">
+                <div class="feature-item">
+                  <div class="feature-icon"><i class="fas fa-check"></i></div>
+                  <div class="feature-text">
+                    <h4>Calidad Premium</h4>
+                    <p>Materiales de la más alta calidad</p>
+                  </div>
+                </div>
+                
+                <div class="feature-item">
+                  <div class="feature-icon"><i class="fas fa-check"></i></div>
+                  <div class="feature-text">
+                    <h4>Diseño Exclusivo</h4>
+                    <p>Piezas únicas y limitadas</p>
+                  </div>
+                </div>
+                
+                <div class="feature-item">
+                  <div class="feature-icon"><i class="fas fa-check"></i></div>
+                  <div class="feature-text">
+                    <h4>Envío Rápido</h4>
+                    <p>A todo el país en 24-48h</p>
+                  </div>
+                </div>
+                
+                <div class="feature-item">
+                  <div class="feature-icon"><i class="fas fa-check"></i></div>
+                  <div class="feature-text">
+                    <h4>Atención Personalizada</h4>
+                    <p>Servicio al cliente 24/7</p>
+                  </div>
+                </div>
+              </div>
+              
+              <a href="#" class="btn primary-btn">Conoce Más Sobre Nosotros <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <p>Experiencias reales de compradores satisfechos</p>
+          </div>
+          
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Increíble calidad en todos los productos que he comprado. El servicio al cliente es excepcional y los envíos siempre llegan antes de lo esperado."</p>
+              <div class="testimonial-author">
+                <img src="img/testimonial-1.jpg" alt="María García">
+                <div>
+                  <h4>María García</h4>
+                  <p>Cliente desde 2020</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Las zapatillas que compré son exactamente como se veían en la web. Muy cómodas y de excelente calidad. Definitivamente volveré a comprar."</p>
+              <div class="testimonial-author">
+                <img src="img/testimonial-2.jpg" alt="Juan Pérez">
+                <div>
+                  <h4>Juan Pérez</h4>
+                  <p>Cliente desde 2021</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <p class="testimonial-text">"Me encanta la variedad de productos y las últimas tendencias que siempre tienen disponibles. La ropa es de excelente calidad y el proceso de compra es muy sencillo."</p>
+              <div class="testimonial-author">
+                <img src="img/testimonial-3.jpg" alt="Laura Rodríguez">
+                <div>
+                  <h4>Laura Rodríguez</h4>
+                  <p>Cliente desde 2019</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section id="contacto" class="newsletter-section">
+        <div class="container">
+          <div class="newsletter-content">
+            <h2>Mantente Conectado</h2>
+            <p>Suscríbete a nuestro newsletter para recibir las últimas novedades, tendencias y ofertas exclusivas.</p>
+            
+            <form id="newsletter-form">
+              <div class="form-group">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit">Suscribirse</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-grid">
+            <div class="cta-content">
+              <h2>¿Listo para renovar tu estilo?</h2>
+              <p>Explora nuestra colección y encuentra las prendas que mejor expresan tu personalidad.</p>
+              <a href="index.html#products" class="btn primary-btn">Comprar Ahora <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="cta-benefits">
+              <h3>Ventajas Flux</h3>
+              <ul>
+                <li><i class="fas fa-check"></i> Envío gratuito en pedidos +$99</li>
+                <li><i class="fas fa-check"></i> Devoluciones sin costo por 30 días</li>
+                <li><i class="fas fa-check"></i> Atención al cliente 24/7</li>
+                <li><i class="fas fa-check"></i> Descuentos exclusivos para suscriptores</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-      <p>&copy; 2025 Nicolas Roggiano. Todos los derechos reservados.</p>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-about">
+            <a class="footer-logo" href="index.html">
+              <span class="logo-text">FLUX</span>
+              <span class="logo-dot">.</span>
+            </a>
+            <p>Somos una tienda de moda comprometida con la calidad y el estilo. Ofrecemos las mejores marcas a precios competitivos.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/nico_roggiano/"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          
+          <div class="footer-links">
+            <h5>Comprar</h5>
+            <ul>
+              <li><a href="index.html#products">Hombres</a></li>
+              <li><a href="index.html#products">Mujeres</a></li>
+              <li><a href="index.html#products">Niños</a></li>
+              <li><a href="index.html#products">Accesorios</a></li>
+              <li><a href="index.html#products">Nuevas Llegadas</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links">
+            <h5>Información</h5>
+            <ul>
+              <li><a href="#about">Sobre Nosotros</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-links">
+            <h5>Mi Cuenta</h5>
+            <ul>
+              <li><a href="login.html">Iniciar Sesión</a></li>
+              <li><a href="#">Ver Carrito</a></li>
+              <li><a href="#">Lista de Deseos</a></li>
+              <li><a href="#">Seguir Pedido</a></li>
+              <li><a href="#">Ayuda</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2025 Nicolás Roggiano. Todos los derechos reservados.</p>
+          <div class="payment-methods">
+            <img src="img-icons/icons8-visa-48.png" alt="Visa">
+            <img src="img-icons/icons8-mastercard-48.png" alt="Mastercard">
+            <img src="img-icons/icons8-amex-48.png" alt="American Express">
+            <img src="img-icons/icons8-paypal-48.png" alt="PayPal">
+          </div>
+        </div>
+      </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="landing-script.js"></script>
   </body>
 </html>
-

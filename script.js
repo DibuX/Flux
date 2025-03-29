@@ -36,22 +36,21 @@ document.addEventListener('DOMContentLoaded', function() {
   
   filterBtns.forEach(btn => {
     btn.addEventListener('click', function() {
-      // Remove active class from all buttons
+      // Eliminar clase Active de todos los botones
       filterBtns.forEach(btn => btn.classList.remove('active'));
       
-      // Add active class to clicked button
+      // Agregar clase Active al boton clickeado
       this.classList.add('active');
       
       const filter = this.getAttribute('data-filter');
       
-      // For demo purposes, we're just showing/hiding items randomly
-      // In a real application, you would filter based on product categories
+      // 
       if (filter === 'all') {
         productItems.forEach(item => {
           item.style.display = 'block';
         });
       } else {
-        // This is just for demo - in a real app you would check product categories
+        // Acá en un futuro habria que cambiar el selector de los productos (que no sea mas random)
         productItems.forEach(item => {
           const random = Math.random();
           if (random > 0.5) {
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Add to cart functionality
+  // Funcionalidad del carrito
   const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
   const cartCount = document.querySelector('.cart-count');
   let count = 0;
@@ -74,11 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
       count++;
       cartCount.textContent = count;
       
-      // Show added to cart message
+      // Mostrar Mensaje de añadido al carrito
       const card = this.closest('.card');
       const productName = card.querySelector('.card-title').textContent;
       
-      // Create toast notification
+      // Crear toast notification
       const toast = document.createElement('div');
       toast.className = 'toast-notification';
       toast.innerHTML = `
@@ -93,12 +92,12 @@ document.addEventListener('DOMContentLoaded', function() {
       
       document.body.appendChild(toast);
       
-      // Show toast
+      // Mostrar toast
       setTimeout(() => {
         toast.classList.add('show');
       }, 100);
       
-      // Remove toast after 3 seconds
+      // Eliminar toast after 3 seconds
       setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => {
@@ -106,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
       }, 3000);
       
-      // Close toast on click
+      // Cerrar toast on click
       const closeBtn = toast.querySelector('.toast-close');
       closeBtn.addEventListener('click', function() {
         toast.classList.remove('show');
@@ -117,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Add toast notification styles
+  // Agregar estilos de notificación a toast
   const style = document.createElement('style');
   style.textContent = `
     .toast-notification {
@@ -166,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   `;
   document.head.appendChild(style);
   
-  // Newsletter form submission
+  // Newsletter form Subscripcion
   const newsletterForm = document.querySelector('.newsletter-form');
   
   if (newsletterForm) {
@@ -176,13 +175,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const email = emailInput.value;
       
       if (email) {
-        // In a real application, you would send this to your server
+        // En una aplicación real, enviar esto al servidor
         console.log('Subscribed email:', email);
         
-        // Clear input
+        // Limpiar input
         emailInput.value = '';
         
-        // Show success message
+        // Mostrar success message
         const toast = document.createElement('div');
         toast.className = 'toast-notification';
         toast.innerHTML = `
@@ -197,12 +196,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(toast);
         
-        // Show toast
+        // Mostrar toast
         setTimeout(() => {
           toast.classList.add('show');
         }, 100);
         
-        // Remove toast after 3 seconds
+        // Eliminar toast despues de 3 seconds
         setTimeout(() => {
           toast.classList.remove('show');
           setTimeout(() => {
@@ -210,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 300);
         }, 3000);
         
-        // Close toast on click
+        // Cerrar toast on click
         const closeBtn = toast.querySelector('.toast-close');
         closeBtn.addEventListener('click', function() {
           toast.classList.remove('show');
@@ -222,5 +221,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-  
-  
