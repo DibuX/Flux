@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="cart-styles.css" />
+    <title>Flux | Carrito de Compras</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+          <a class="navbar-brand flux-logo" href="index.html">
+            <span class="logo-text">FLUX</span>
+            <span class="logo-dot">.</span>
+          </a>
+          <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hombres</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="index.html">Zapatillas</a></li>
+                  <li><a class="dropdown-item" href="index.html">Ropa</a></li>
+                  <li><a class="dropdown-item" href="index.html">Accesorios</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="index.html">Ver Todo</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mujeres</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="index.html">Zapatillas</a></li>
+                  <li><a class="dropdown-item" href="index.html">Ropa</a></li>
+                  <li><a class="dropdown-item" href="index.html">Accesorios</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="index.html">Ver Todo</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">Niños</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="index.html">Zapatillas</a></li>
+                  <li><a class="dropdown-item" href="index.html">Ropa</a></li>
+                  <li><a class="dropdown-item" href="index.html">Accesorios</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="index.html">Ver Todo</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+              <li class="nav-item"><a class="nav-link new-arrivals" href="index.html">Nuevas Llegadas</a></li>
+            </ul>
+            <div class="d-flex align-items-center">
+              <div class="search-container">
+                <input class="form-control search-input" type="search" placeholder="Buscar..." aria-label="Search">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+              <div class="nav-icons">
+                <a href="login.html" class="nav-icon"><i class="fa-regular fa-user"></i></a>
+                <a href="#" class="nav-icon"><i class="fa-regular fa-heart"></i></a>
+                <a href="cart.html" class="nav-icon cart-icon active">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                  <span class="cart-count">3</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <div class="cart-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Tu Carrito</h2>
+          <p>Revisa y modifica los productos de tu carrito</p>
+        </div>
+
+        <div class="row">
+          <!-- Cart Items -->
+          <div class="col-lg-8">
+            <div class="cart-items-container">
+              <!-- Cart Item 1 -->
+              <div class="cart-item">
+                <div class="cart-item-image">
+                  <img src="img/4DFWD_4_Shoes_Black_JI1452_01_00_standard.avif" alt="4DFWD Shoes">
+                </div>
+                <div class="cart-item-details">
+                  <div class="cart-item-info">
+                    <h4>4DFWD Shoes</h4>
+                    <p class="cart-item-brand">Adidas</p>
+                    <div class="cart-item-options">
+                      <span>Talla: 42</span>
+                      <span>Color: Negro</span>
+                    </div>
+                  </div>
+                  <div class="cart-item-price">
+                    <p>$129.99</p>
+                  </div>
+                  <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease"><i class="fa-solid fa-minus"></i></button>
+                    <input type="number" value="1" min="1" max="10" class="quantity-input">
+                    <button class="quantity-btn increase"><i class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <div class="cart-item-total">
+                    <p>$129.99</p>
+                  </div>
+                  <div class="cart-item-actions">
+                    <button class="remove-item-btn"><i class="fa-solid fa-trash"></i></button>
+                    <button class="save-for-later-btn"><i class="fa-regular fa-heart"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cart Item 2 -->
+              <div class="cart-item">
+                <div class="cart-item-image">
+                  <img src="img/AIR+FORCE+1+_07.png" alt="Air Force 1 07">
+                </div>
+                <div class="cart-item-details">
+                  <div class="cart-item-info">
+                    <h4>Air Force 1 07</h4>
+                    <p class="cart-item-brand">Nike</p>
+                    <div class="cart-item-options">
+                      <span>Talla: 40</span>
+                      <span>Color: Blanco</span>
+                    </div>
+                  </div>
+                  <div class="cart-item-price">
+                    <p>$109.99</p>
+                  </div>
+                  <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease"><i class="fa-solid fa-minus"></i></button>
+                    <input type="number" value="1" min="1" max="10" class="quantity-input">
+                    <button class="quantity-btn increase"><i class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <div class="cart-item-total">
+                    <p>$109.99</p>
+                  </div>
+                  <div class="cart-item-actions">
+                    <button class="remove-item-btn"><i class="fa-solid fa-trash"></i></button>
+                    <button class="save-for-later-btn"><i class="fa-regular fa-heart"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cart Item 3 -->
+              <div class="cart-item">
+                <div class="cart-item-image">
+                  <img src="img/Essentials_Fleece_Loose_Joggers_Green_JC8991_21_model.avif" alt="Essentials Joggers">
+                </div>
+                <div class="cart-item-details">
+                  <div class="cart-item-info">
+                    <h4>Essentials Joggers</h4>
+                    <p class="cart-item-brand">Adidas</p>
+                    <div class="cart-item-options">
+                      <span>Talla: M</span>
+                      <span>Color: Verde</span>
+                    </div>
+                  </div>
+                  <div class="cart-item-price">
+                    <p><span class="original-price">$74.99</span> $59.99</p>
+                  </div>
+                  <div class="cart-item-quantity">
+                    <button class="quantity-btn decrease"><i class="fa-solid fa-minus"></i></button>
+                    <input type="number" value="1" min="1" max="10" class="quantity-input">
+                    <button class="quantity-btn increase"><i class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <div class="cart-item-total">
+                    <p>$59.99</p>
+                  </div>
+                  <div class="cart-item-actions">
+                    <button class="remove-item-btn"><i class="fa-solid fa-trash"></i></button>
+                    <button class="save-for-later-btn"><i class="fa-regular fa-heart"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Empty Cart Message (hidden by default) -->
+              <div class="empty-cart-message" style="display: none;">
+                <div class="text-center py-5">
+                  <i class="fa-solid fa-cart-shopping empty-cart-icon"></i>
+                  <h3>Tu carrito está vacío</h3>
+                  <p>Parece que aún no has añadido productos a tu carrito.</p>
+                  <a href="index.html#products" class="btn view-all-btn mt-3">Explorar Productos</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cart Actions -->
+            <div class="cart-actions">
+              <div class="coupon-container">
+                <input type="text" placeholder="Código de descuento" class="form-control">
+                <button class="btn apply-coupon-btn">Aplicar</button>
+              </div>
+              <a href="index.html#products" class="btn continue-shopping-btn">
+                <i class="fa-solid fa-arrow-left"></i> Seguir Comprando
+              </a>
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="col-lg-4">
+            <div class="order-summary">
+              <h3>Resumen del Pedido</h3>
+              
+              <div class="summary-item">
+                <span>Subtotal</span>
+                <span>$299.97</span>
+              </div>
+              
+              <div class="summary-item">
+                <span>Descuento</span>
+                <span>-$15.00</span>
+              </div>
+              
+              <div class="summary-item">
+                <span>Envío</span>
+                <span>Gratis</span>
+              </div>
+              
+              <div class="summary-item">
+                <span>Impuestos</span>
+                <span>$28.50</span>
+              </div>
+              
+              <div class="summary-total">
+                <span>Total</span>
+                <span>$313.47</span>
+              </div>
+              
+              <button class="btn checkout-btn">
+                Proceder al Pago <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              
+              <div class="payment-methods-summary">
+                <p>Métodos de pago aceptados:</p>
+                <div class="payment-icons">
+                  <img src="img-icons/icons8-visa-48.png" alt="Visa">
+                  <img src="img-icons/icons8-mastercard-48.png" alt="Mastercard">
+                  <img src="img-icons/icons8-amex-48.png" alt="American Express">
+                  <img src="img-icons/icons8-paypal-48.png" alt="PayPal">
+                </div>
+              </div>
+            </div>
+
+            <!-- Productos recomendados -->
+            <div class="recommended-products">
+              <h3>También te puede interesar</h3>
+              
+              <div class="recommended-product">
+                <div class="recommended-product-image">
+                  <img src="img/Gazelle_Indoor_Shoes_Blue_IF9643_01_standard.avif" alt="Gazelle Indoor Shoes">
+                </div>
+                <div class="recommended-product-info">
+                  <h5>Gazelle Indoor Shoes</h5>
+                  <p class="recommended-product-brand">Adidas</p>
+                  <p class="recommended-product-price">$99.99</p>
+                </div>
+                <button class="btn add-to-cart-btn-sm">Añadir</button>
+              </div>
+              
+              <div class="recommended-product">
+                <div class="recommended-product-image">
+                  <img src="img/TLRD_Impact_Training_High_Support_Bra_Pink_JI8039_21_model.avif" alt="TLRD Impact Training Bra">
+                </div>
+                <div class="recommended-product-info">
+                  <h5>TLRD Impact Training Bra</h5>
+                  <p class="recommended-product-brand">Adidas</p>
+                  <p class="recommended-product-price">$79.99</p>
+                </div>
+                <button class="btn add-to-cart-btn-sm">Añadir</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- caracteristicas -->
+    <div class="cart-features">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3 col-6">
+            <div class="feature-item">
+              <i class="fa-solid fa-truck-fast"></i>
+              <h4>Envío Gratis</h4>
+              <p>En pedidos superiores a $99</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="feature-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <h4>Pago Seguro</h4>
+              <p>Transacciones protegidas</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="feature-item">
+              <i class="fa-solid fa-rotate-left"></i>
+              <h4>Devoluciones</h4>
+              <p>30 días para cambios</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="feature-item">
+              <i class="fa-solid fa-headset"></i>
+              <h4>Soporte 24/7</h4>
+              <p>Atención al cliente</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-about">
+              <a class="footer-logo" href="#">
+                <span class="logo-text">FLUX</span>
+                <span class="logo-dot">.</span>
+              </a>
+              <p>Somos una tienda de moda comprometida con la calidad y el estilo. Ofrecemos las mejores marcas a precios competitivos.</p>
+              <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 col-6">
+            <h5 class="footer-title">Comprar</h5>
+            <ul class="footer-links">
+              <li><a href="#">Hombres</a></li>
+              <li><a href="#">Mujeres</a></li>
+              <li><a href="#">Niños</a></li>
+              <li><a href="#">Accesorios</a></li>
+              <li><a href="#">Nuevas Llegadas</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 col-6">
+            <h5 class="footer-title">Información</h5>
+            <ul class="footer-links">
+              <li><a href="Landing.html">Sobre Nosotros</a></li>
+              <li><a href="#">Contacto</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Preguntas Frecuentes</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 col-6">
+            <h5 class="footer-title">Mi Cuenta</h5>
+            <ul class="footer-links">
+              <li><a href="login.html">Iniciar Sesión</a></li>
+              <li><a href="cart.html">Ver Carrito</a></li>
+              <li><a href="#">Lista de Deseos</a></li>
+              <li><a href="#">Seguir Pedido</a></li>
+              <li><a href="#">Ayuda</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 col-6">
+            <h5 class="footer-title">Atención</h5>
+            <ul class="footer-links">
+              <li><a href="#">Devoluciones</a></li>
+              <li><a href="#">Métodos de Pago</a></li>
+              <li><a href="#">Envíos</a></li>
+              <li><a href="#">Defensa al Consumidor</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <p class="copyright">&copy; 2025 Nicolás Roggiano. Todos los derechos reservados.</p>
+            </div>
+            <div class="col-md-6">
+              <div class="payment-methods">
+                <img src="img-icons/icons8-visa-48.png" alt="Visa">
+                <img src="img-icons/icons8-mastercard-48.png" alt="Mastercard">
+                <img src="img-icons/icons8-amex-48.png" alt="American Express">
+                <img src="img-icons/icons8-paypal-48.png" alt="PayPal">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://kit.fontawesome.com/f130cba737.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+  </body>
+</html>
+

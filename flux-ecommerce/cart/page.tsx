@@ -18,7 +18,7 @@ export default function CartPage() {
   const [activeStep, setActiveStep] = useState(1)
   const [isProcessing, setIsProcessing] = useState(false)
 
-  // Checkout form state
+  // Estado del formulario de pago
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -44,7 +44,7 @@ export default function CartPage() {
     e.preventDefault()
     setIsProcessing(true)
 
-    // Simulate processing
+    // Simular procesamiento
     setTimeout(() => {
       showToast("¡Pedido realizado con éxito!", "success")
       clearCart()
@@ -61,7 +61,7 @@ export default function CartPage() {
     setActiveStep(activeStep - 1)
   }
 
-  // Animation variants
+  // Variantes de animación
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -355,7 +355,7 @@ export default function CartPage() {
                   </button>
                 </div>
 
-                {/* Checkout Steps */}
+                {/* Pasos de Pago */}
                 <div className="mb-8">
                   <div className="flex justify-between items-center">
                     <div className="flex flex-col items-center">
@@ -388,7 +388,7 @@ export default function CartPage() {
                 </div>
 
                 <form onSubmit={handleCheckout}>
-                  {/* Step 1: Personal Information */}
+                  {/* Paso 1: Información personal */}
                   {activeStep === 1 && (
                     <motion.div
                       initial={{ opacity: 0, x: -20 }}
