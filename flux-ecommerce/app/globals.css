@@ -5,6 +5,18 @@
 @tailwind utilities;
 
 :root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.5rem;
+  
+  
   --primary-color: #ff5722;
   --secondary-color: #333;
   --accent-color: #ff8a65;
@@ -365,4 +377,3 @@ body {
     @apply bg-gray-800 text-white -translate-y-1;
   }
 }
-

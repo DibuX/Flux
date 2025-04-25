@@ -1,76 +1,52 @@
 "use client"
 
 import type React from "react"
-
-import { createContext, useContext, useEffect, useState } from "react"
-import { supabase } from "@/lib/supabase"
-import type { Session, User } from "@supabase/supabase-js"
+import { createContext, useContext, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 
 // Auth Context
 type AuthContextType = {
-  user: User | null
-  session: Session | null
+  user: string | null // Cambia esto según los datos de tu base de datos
   isLoading: boolean
-  signIn: (email: string, password: string) => Promise<{ error: any }>
-  signUp: (email: string, password: string, fullName: string) => Promise<{ error: any; data: any }>
-  signOut: () => Promise<void>
+  signIn: (username: string, password: string) => Promise<void>
+  signOut: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-// Cart Context
-type CartItem = {
-  id: number
-  product_id: number
-  quantity: number
-  product: {
-    id: number
-    name: string
-    price: number
-    image_url: string
-    brand: string
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const signIn = async (username: string, password: string) => {
+    setIsLoading(true)
+    // Aquí puedes agregar la lógica para autenticarte con tu base de datos
+    // Ejemplo: consulta SQL para verificar usuario y contraseña
+    setUser(username) // Simula que el usuario ha iniciado sesión
+    setIsLoading(false)
   }
-}
 
-type CartContextType = {
-  cartItems: CartItem[]
-  isCartLoading: boolean
-  addToCart: (productId: number, quantity?: number) => Promise<void>
-  removeFromCart: (productId: number) => Promise<void>
-  updateCartItemQuantity: (productId: number, quantity: number) => Promise<void>
-  clearCart: () => Promise<void>
-  cartTotal: number
-  cartCount: number
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined)
-
-// Favorites Context
-type FavoriteItem = {
-  id: number
-  product_id: number
-  product: {
-    id: number
-    name: string
-    price: number
-    image_url: string
-    brand: string
+  const signOut = () => {
+    setUser(null)
   }
+
+  return (
+    <AuthContext.Provider value={{ user, isLoading, signIn, signOut }}>
+      <AnimatePresence>{children}</AnimatePresence>
+    </AuthContext.Provider>
+  )
 }
 
-type FavoritesContextType = {
-  favorites: FavoriteItem[]
-  isFavoritesLoading: boolean
-  addToFavorites: (productId: number) => Promise<void>
-  removeFromFavorites: (productId: number) => Promise<void>
-  isFavorite: (productId: number) => boolean
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error("useAuth debe usarse dentro de un AuthProvider")
+  }
+  return context
 }
-
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
 
 // Toast Context
-type ToastType = "success" | "error" | "info"
+type ToastType = "success" | "error" | "warning" | "info"
 
 type Toast = {
   id: string
@@ -80,461 +56,187 @@ type Toast = {
 
 type ToastContextType = {
   toasts: Toast[]
-  showToast: (message: string, type?: ToastType) => void
-  hideToast: (id: string) => void
+  showToast: (message: string, type: ToastType) => void
+  dismissToast: (id: string) => void
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined)
 
-export function Providers({ children }: { children: React.ReactNode }) {
-  // Auth state
-  const [user, setUser] = useState<User | null>(null)
-  const [session, setSession] = useState<Session | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  // Cart state
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
-  const [isCartLoading, setIsCartLoading] = useState(true)
-  const [cartId, setCartId] = useState<number | null>(null)
-
-  // Favorites state
-  const [favorites, setFavorites] = useState<FavoriteItem[]>([])
-  const [isFavoritesLoading, setIsFavoritesLoading] = useState(true)
-
-  // Toast state
+export const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([])
 
-  // Auth functions
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      setIsLoading(false)
-    })
+  const showToast = (message: string, type: ToastType = "info") => {
+    const id = Math.random().toString(36).substring(2, 9)
+    setToasts((prev) => [...prev, { id, message, type }])
 
-    return () => {
-      subscription.unsubscribe()
-    }
-  }, [])
-
-  async function signIn(email: string, password: string) {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    return { error }
-  }
-
-  async function signUp(email: string, password: string, fullName: string) {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-      },
-    })
-
-    if (!error && data.user) {
-      // Create profile
-      await supabase.from("profiles").insert({
-        id: data.user.id,
-        full_name: fullName,
-      })
-    }
-
-    return { data, error }
-  }
-
-  async function signOut() {
-    await supabase.auth.signOut()
-  }
-
-  // Cart functions
-  useEffect(() => {
-    async function fetchCart() {
-      if (!user) {
-        setCartItems([])
-        setIsCartLoading(false)
-        return
-      }
-
-      try {
-        // Check if user has a cart
-        const { data: carts } = await supabase.from("carts").select("id").eq("user_id", user.id).single()
-
-        if (carts) {
-          setCartId(carts.id)
-
-          // Fetch cart items with product details
-          const { data: items } = await supabase
-            .from("cart_items")
-            .select(`
-              id,
-              product_id,
-              quantity,
-              product:products(
-                id,
-                name,
-                price,
-                image_url,
-                brand
-              )
-            `)
-            .eq("cart_id", carts.id)
-
-          setCartItems(items || [])
-        } else {
-          // Create a new cart for the user
-          const { data: newCart } = await supabase.from("carts").insert({ user_id: user.id }).select("id").single()
-
-          if (newCart) {
-            setCartId(newCart.id)
-          }
-
-          setCartItems([])
-        }
-      } catch (error) {
-        console.error("Error fetching cart:", error)
-      } finally {
-        setIsCartLoading(false)
-      }
-    }
-
-    fetchCart()
-  }, [user])
-
-  async function addToCart(productId: number, quantity = 1) {
-    if (!user || !cartId) {
-      showToast("Debes iniciar sesión para agregar productos al carrito", "error")
-      return
-    }
-
-    try {
-      // Check if product already in cart
-      const existingItem = cartItems.find((item) => item.product_id === productId)
-
-      if (existingItem) {
-        // Update quantity
-        await updateCartItemQuantity(productId, existingItem.quantity + quantity)
-      } else {
-        // Add new item
-        const { data, error } = await supabase
-          .from("cart_items")
-          .insert({
-            cart_id: cartId,
-            product_id: productId,
-            quantity,
-          })
-          .select(`
-            id,
-            product_id,
-            quantity,
-            product:products(
-              id,
-              name,
-              price,
-              image_url,
-              brand
-            )
-          `)
-          .single()
-
-        if (error) throw error
-
-        setCartItems([...cartItems, data])
-        showToast("Producto agregado al carrito", "success")
-      }
-    } catch (error) {
-      console.error("Error adding to cart:", error)
-      showToast("Error al agregar al carrito", "error")
-    }
-  }
-
-  async function removeFromCart(productId: number) {
-    if (!user || !cartId) return
-
-    try {
-      const itemToRemove = cartItems.find((item) => item.product_id === productId)
-      if (!itemToRemove) return
-
-      await supabase.from("cart_items").delete().eq("id", itemToRemove.id)
-
-      setCartItems(cartItems.filter((item) => item.product_id !== productId))
-      showToast("Producto eliminado del carrito", "info")
-    } catch (error) {
-      console.error("Error removing from cart:", error)
-      showToast("Error al eliminar del carrito", "error")
-    }
-  }
-
-  async function updateCartItemQuantity(productId: number, quantity: number) {
-    if (!user || !cartId || quantity < 1) return
-
-    try {
-      const itemToUpdate = cartItems.find((item) => item.product_id === productId)
-      if (!itemToUpdate) return
-
-      await supabase.from("cart_items").update({ quantity }).eq("id", itemToUpdate.id)
-
-      setCartItems(cartItems.map((item) => (item.product_id === productId ? { ...item, quantity } : item)))
-    } catch (error) {
-      console.error("Error updating cart:", error)
-      showToast("Error al actualizar el carrito", "error")
-    }
-  }
-
-  async function clearCart() {
-    if (!user || !cartId) return
-
-    try {
-      await supabase.from("cart_items").delete().eq("cart_id", cartId)
-
-      setCartItems([])
-      showToast("Carrito vaciado", "info")
-    } catch (error) {
-      console.error("Error clearing cart:", error)
-      showToast("Error al vaciar el carrito", "error")
-    }
-  }
-
-  const cartTotal = cartItems.reduce((total, item) => total + (item.product?.price || 0) * item.quantity, 0)
-
-  const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0)
-
-  // Favorites functions
-  useEffect(() => {
-    async function fetchFavorites() {
-      if (!user) {
-        setFavorites([])
-        setIsFavoritesLoading(false)
-        return
-      }
-
-      try {
-        const { data } = await supabase
-          .from("favorites")
-          .select(`
-            id,
-            product_id,
-            product:products(
-              id,
-              name,
-              price,
-              image_url,
-              brand
-            )
-          `)
-          .eq("user_id", user.id)
-
-        setFavorites(data || [])
-      } catch (error) {
-        console.error("Error fetching favorites:", error)
-      } finally {
-        setIsFavoritesLoading(false)
-      }
-    }
-
-    fetchFavorites()
-  }, [user])
-
-  async function addToFavorites(productId: number) {
-    if (!user) {
-      showToast("Debes iniciar sesión para agregar favoritos", "error")
-      return
-    }
-
-    try {
-      // Check if already in favorites
-      if (favorites.some((fav) => fav.product_id === productId)) {
-        return
-      }
-
-      const { data, error } = await supabase
-        .from("favorites")
-        .insert({
-          user_id: user.id,
-          product_id: productId,
-        })
-        .select(`
-          id,
-          product_id,
-          product:products(
-            id,
-            name,
-            price,
-            image_url,
-            brand
-          )
-        `)
-        .single()
-
-      if (error) throw error
-
-      setFavorites([...favorites, data])
-      showToast("Producto agregado a favoritos", "success")
-    } catch (error) {
-      console.error("Error adding to favorites:", error)
-      showToast("Error al agregar a favoritos", "error")
-    }
-  }
-
-  async function removeFromFavorites(productId: number) {
-    if (!user) return
-
-    try {
-      const itemToRemove = favorites.find((fav) => fav.product_id === productId)
-      if (!itemToRemove) return
-
-      await supabase.from("favorites").delete().eq("id", itemToRemove.id)
-
-      setFavorites(favorites.filter((fav) => fav.product_id !== productId))
-      showToast("Producto eliminado de favoritos", "info")
-    } catch (error) {
-      console.error("Error removing from favorites:", error)
-      showToast("Error al eliminar de favoritos", "error")
-    }
-  }
-
-  function isFavorite(productId: number) {
-    return favorites.some((fav) => fav.product_id === productId)
-  }
-
-  // Toast functions
-  function showToast(message: string, type: ToastType = "success") {
-    const id = Date.now().toString()
-    setToasts([...toasts, { id, message, type }])
-
-    // Auto-remove after 3 seconds
+    // Auto dismiss after 3 seconds
     setTimeout(() => {
-      hideToast(id)
+      dismissToast(id)
     }, 3000)
   }
 
-  function hideToast(id: string) {
-    setToasts(toasts.filter((toast) => toast.id !== id))
+  const dismissToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        session,
-        isLoading,
-        signIn,
-        signUp,
-        signOut,
-      }}
-    >
-      <CartContext.Provider
-        value={{
-          cartItems,
-          isCartLoading,
-          addToCart,
-          removeFromCart,
-          updateCartItemQuantity,
-          clearCart,
-          cartTotal,
-          cartCount,
-        }}
-      >
-        <FavoritesContext.Provider
-          value={{
-            favorites,
-            isFavoritesLoading,
-            addToFavorites,
-            removeFromFavorites,
-            isFavorite,
-          }}
-        >
-          <ToastContext.Provider
-            value={{
-              toasts,
-              showToast,
-              hideToast,
-            }}
+    <ToastContext.Provider value={{ toasts, showToast, dismissToast }}>
+      {children}
+      {/* Toast container */}
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+        {toasts.map((toast) => (
+          <div
+            key={toast.id}
+            className={`px-4 py-3 rounded-lg shadow-md flex items-center justify-between min-w-[300px] ${
+              toast.type === "success"
+                ? "bg-green-500"
+                : toast.type === "error"
+                  ? "bg-red-500"
+                  : toast.type === "warning"
+                    ? "bg-amber-500"
+                    : "bg-blue-500"
+            } text-white`}
           >
-            {children}
-            <AnimatePresence>
-              {toasts.map((toast) => (
-                <Toast key={toast.id} toast={toast} onClose={() => hideToast(toast.id)} />
-              ))}
-            </AnimatePresence>
-          </ToastContext.Provider>
-        </FavoritesContext.Provider>
-      </CartContext.Provider>
-    </AuthContext.Provider>
+            <p>{toast.message}</p>
+            <button onClick={() => dismissToast(toast.id)} className="ml-2 text-white">
+              &times;
+            </button>
+          </div>
+        ))}
+      </div>
+    </ToastContext.Provider>
   )
 }
 
-// Toast component
-import { motion } from "framer-motion"
+export const useToast = () => {
+  const context = useContext(ToastContext)
+  if (!context) {
+    throw new Error("useToast debe usarse dentro de un ToastProvider")
+  }
+  return context
+}
 
-function Toast({
-  toast,
-  onClose,
-}: {
-  toast: { id: string; message: string; type: "success" | "error" | "info" }
-  onClose: () => void
-}) {
-  const bgColor = {
-    success: "bg-green-500",
-    error: "bg-red-500",
-    info: "bg-blue-500",
+// Cart Context
+type CartItem = {
+  id: number
+  quantity: number
+}
+
+type CartContextType = {
+  items: CartItem[]
+  addToCart: (productId: number, quantity?: number) => void
+  removeFromCart: (productId: number) => void
+  updateQuantity: (productId: number, quantity: number) => void
+  clearCart: () => void
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined)
+
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [items, setItems] = useState<CartItem[]>([])
+
+  const addToCart = (productId: number, quantity = 1) => {
+    setItems((prev) => {
+      const existingItem = prev.find((item) => item.id === productId)
+      if (existingItem) {
+        return prev.map((item) => (item.id === productId ? { ...item, quantity: item.quantity + quantity } : item))
+      } else {
+        return [...prev, { id: productId, quantity }]
+      }
+    })
   }
 
-  const icon = {
-    success: "fa-check-circle",
-    error: "fa-exclamation-circle",
-    info: "fa-info-circle",
+  const removeFromCart = (productId: number) => {
+    setItems((prev) => prev.filter((item) => item.id !== productId))
+  }
+
+  const updateQuantity = (productId: number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId)
+      return
+    }
+
+    setItems((prev) => prev.map((item) => (item.id === productId ? { ...item, quantity } : item)))
+  }
+
+  const clearCart = () => {
+    setItems([])
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50, x: 0 }}
-      animate={{ opacity: 1, y: 0, x: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      className={`fixed bottom-4 right-4 z-50 p-4 rounded-md shadow-lg text-white flex items-center ${bgColor[toast.type]}`}
-    >
-      <i className={`fas ${icon[toast.type]} mr-3`}></i>
-      <p>{toast.message}</p>
-      <button onClick={onClose} className="ml-4 text-white">
-        <i className="fas fa-times"></i>
-      </button>
-    </motion.div>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart, updateQuantity, clearCart }}>
+      {children}
+    </CartContext.Provider>
   )
 }
 
-// Custom hooks
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider")
-  }
-  return context
-}
-
-export function useCart() {
+export const useCart = () => {
   const context = useContext(CartContext)
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider")
+  if (!context) {
+    throw new Error("useCart debe usarse dentro de un CartProvider")
   }
   return context
 }
 
-export function useFavorites() {
+// Favorites Context
+type FavoritesContextType = {
+  favorites: number[]
+  addToFavorites: (productId: number) => void
+  removeFromFavorites: (productId: number) => void
+  isFavorite: (productId: number) => boolean
+  clearFavorites: () => void
+}
+
+const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
+
+export const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
+  const [favorites, setFavorites] = useState<number[]>([])
+
+  const addToFavorites = (productId: number) => {
+    setFavorites((prev) => {
+      if (prev.includes(productId)) {
+        return prev
+      }
+      return [...prev, productId]
+    })
+  }
+
+  const removeFromFavorites = (productId: number) => {
+    setFavorites((prev) => prev.filter((id) => id !== productId))
+  }
+
+  const isFavorite = (productId: number) => {
+    return favorites.includes(productId)
+  }
+
+  const clearFavorites = () => {
+    setFavorites([])
+  }
+
+  return (
+    <FavoritesContext.Provider value={{ favorites, addToFavorites, removeFromFavorites, isFavorite, clearFavorites }}>
+      {children}
+    </FavoritesContext.Provider>
+  )
+}
+
+export const useFavorites = () => {
   const context = useContext(FavoritesContext)
-  if (context === undefined) {
-    throw new Error("useFavorites must be used within a FavoritesProvider")
+  if (!context) {
+    throw new Error("useFavorites debe usarse dentro de un FavoritesProvider")
   }
   return context
 }
 
-export function useToast() {
-  const context = useContext(ToastContext)
-  if (context === undefined) {
-    throw new Error("useToast must be used within a ToastProvider")
-  }
-  return context
+// Combine all providers
+export const AppProviders = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </FavoritesProvider>
+      </CartProvider>
+    </AuthProvider>
+  )
 }
-
